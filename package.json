@@ -1,0 +1,10 @@
+{
+  "name": "rsvpman",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rm -rf built && mkdir built && cd server && npm run build && cp -R dist/ ../built/",
+    "docker-prepare": "npm run build && docker build . -t alombardo4/rsvpman"
+  },
+  "author": "Alec Lombardo",
+  "license": "MIT"
+}

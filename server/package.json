@@ -5,7 +5,8 @@
   "scripts": {
     "watch": "concurrently -k -p \"[{name}]\" -n \"Typescript,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
     "watch-ts": "tsc -w",
-    "watch-node": "nodemon dist/index.js"
+    "watch-node": "nodemon dist/index.js",
+    "build": "rm -rf dist && tsc && cp package.json dist/ && cp package-lock.json dist/"
   },
   "author": "Alec Lombardo",
   "license": "MIT",

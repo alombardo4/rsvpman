@@ -1,3 +1,6 @@
+import { Config } from "../config";
+import * as swagger from 'swagger-ui-express';
+
 const document = {
     'swagger': '3.0',
     'info': {
@@ -414,4 +417,12 @@ const document = {
 
 export function docs(req, res) {
     return res.json(document);
+}
+
+export function configureSwagger(app, config: Config) {
+    const swaggerOpts = {
+        explorer: true,
+        swaggerUrl: `http://localhost:${config.port}/api/docs.json`
+    };
+    app.use('/api/docs', swagger.serve, swagger.setup('', swaggerOpts));
 }
