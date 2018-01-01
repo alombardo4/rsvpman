@@ -1,0 +1,47 @@
+{
+  "name": "rsvpman-server",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "watch": "concurrently -k -p \"[{name}]\" -n \"Typescript,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "watch-ts": "tsc -w",
+    "watch-node": "nodemon dist/index.js"
+  },
+  "author": "Alec Lombardo",
+  "license": "MIT",
+  "env": {
+    "PYTHON": "/usr/bin/python"
+  },
+  "devDependencies": {
+    "@types/bcrypt-nodejs": "0.0.30",
+    "@types/bluebird": "^3.5.19",
+    "@types/body-parser": "^1.16.8",
+    "@types/express": "^4.11.0",
+    "@types/express-jwt": "0.0.38",
+    "@types/express-session": "^1.15.6",
+    "@types/express-validator": "^3.0.0",
+    "@types/jsonwebtoken": "^7.2.5",
+    "@types/mongoose": "^4.7.31",
+    "@types/passport": "^0.4.2",
+    "@types/passport-local": "^1.0.32",
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.14.6",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "composable-middleware": "^0.3.0",
+    "connect-mongo": "^2.0.0",
+    "express": "^4.16.2",
+    "express-jwt": "^5.3.0",
+    "express-session": "^1.15.6",
+    "express-validator": "^4.3.0",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^5.0.0-rc0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "swagger-ui-express": "^2.0.13"
+  }
+}
