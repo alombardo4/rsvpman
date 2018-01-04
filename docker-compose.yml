@@ -7,9 +7,9 @@ services:
       - 27017:27017
     volumes:
       - /Users/alec/Docker/rsvpman/mongo:/data/db
-  web:
-    image: alombardo4/rsvpman
-    ports:
-      - 4000:4000
-    links:
-      - mongo:db
+  # web:
+  #   image: alombardo4/rsvpman
+  #   ports:
+  #     - 4000:4000
+  #   links:
+  #     - mongo:db
