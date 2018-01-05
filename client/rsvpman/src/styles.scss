@@ -28,3 +28,7 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 body {
     margin: 0;
 }
+
+a {
+    color: mat-color($mat-blue, 500);
+}

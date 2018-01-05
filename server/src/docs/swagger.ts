@@ -56,6 +56,28 @@ const document = {
                 }
             }
         },
+        '/api/info': {
+            'get': {
+                summary: 'Get the basic event info',
+                produces: ['application/json'],
+                responses: {
+                    200: {
+                        description: 'success',
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                'name': {
+                                    type: 'string'
+                                },
+                                'date': {
+                                    type: 'date'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         '/api/users': {
             'get': {
                 summary: 'Get list of users',

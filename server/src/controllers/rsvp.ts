@@ -28,7 +28,7 @@ export function getPartyForRSVP(req, res) {
 export function createRSVP(req, res) {
     const key = req.params.key;
 
-    Party.findOne({key: key}).exec()
+    Party.findOne({key: /^key$/i}).exec()
         .then(partyDoc => {
             if(!partyDoc) {
                 return res.status(404).send();
@@ -64,7 +64,7 @@ export function createRSVP(req, res) {
 export function findKeys(req, res) {
     const firstName = req.query.firstName;
     const lastName = req.query.lastName;
-    Party.find({'people.firstName': firstName, 'people.lastName': lastName}, {'key': 1, '_id': 0}).exec()
+    Party.find({'people.firstName': /^firstName$/i, 'people.lastName': /^lastName$/i}, {'key': 1, '_id': 0}).exec()
         .then((docs: Document[]) => {
             if(!docs || docs.length === 0) {
                 return res.status(404).send();

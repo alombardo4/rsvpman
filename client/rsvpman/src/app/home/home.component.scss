@@ -1,0 +1,45 @@
+@import '~@angular/material/theming';
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    a {
+        margin-top: 10px;
+        font-size: 12px;
+        text-decoration: none;
+    }
+
+    form {
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+
+        p {
+            text-align: center;
+            word-wrap: normal;
+
+            &.error {
+                color: mat-color($mat-red, 500);
+            }
+        }
+
+        mat-form-field {
+            width: 200px;
+    
+            /deep/ span.mat-input-placeholder-wrapper {
+                text-align: center
+            }
+    
+            /deep/ input {
+                text-align: center;
+            }
+        }
+    }
+
+
+}

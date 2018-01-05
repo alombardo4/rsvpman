@@ -4,8 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
     <div class="body">
-      <h1>Hello World</h1>
-      <button mat-raised-button color="accent">Click Me</button>
+      <router-outlet></router-outlet>
     </div>
   `,
   styleUrls: ['./app.component.scss']

@@ -2,6 +2,7 @@ import * as authController from './controllers/auth';
 import * as userController from './controllers/user';
 import * as partyController from './controllers/party';
 import * as rsvpController from './controllers/rsvp';
+import * as infoController from './controllers/info';
 import * as docsController from './docs/swagger';
 import { isAuthenticated } from './auth/jwt';
 
@@ -25,6 +26,9 @@ export function configureRoutes(app, passport) {
     app.get('/api/rsvp/findKeys', rsvpController.findKeys);
     app.get('/api/rsvp/:key', rsvpController.getPartyForRSVP);
     
+    // Info
+    app.get('/api/info', infoController.eventInfo);
+
     // Swagger
     app.get('/api/docs.json', docsController.docs);
 

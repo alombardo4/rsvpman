@@ -19,7 +19,13 @@ export default {
 
         
         const app = express();
-        
+        app.use((req, res, next) => {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
+
         (<any>mongoose).Promise = bluebird;
         mongoose
             .connect(config.mongo.url)
@@ -49,12 +55,6 @@ export default {
 
         configureSwagger(app, config);
         
-        app.use((req, res, next) => {
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-            res.header('Access-Control-Allow-Headers', '*');
-            next();
-        })
 
 
         app.listen(config.port, () => {

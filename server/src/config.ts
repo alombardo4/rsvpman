@@ -9,7 +9,12 @@ export class Config {
 
     private _seed = false;
 
+    private _eventName = 'Morgen & Alec';
+
+    private _eventDate = new Date();
+
     constructor() {
+        this._eventDate.setTime(1535850000000);
         if(process.env.PORT) {
             this._port = process.env.PORT;
         }
@@ -21,6 +26,17 @@ export class Config {
         }
         if(process.env.SEED) {
             this._seed = !!parseInt(process.env.SEED);
+        }
+        if(process.env.EVENT_NAME) {
+            this._eventName = process.env.EVENT_NAME;
+        }
+
+        if(process.env.EVENT_DATE) {
+            try {
+                this._eventDate.setTime(parseInt(process.env.EVENT_DATE));
+            } catch(e) {
+                this._eventDate.setTime(1535850000000);
+            }
         }
     }
 
@@ -38,6 +54,14 @@ export class Config {
 
     get seed(): boolean {
         return this._seed;
+    }
+
+    get eventName(): string {
+        return this._eventName;
+    }
+
+    get eventDate(): Date {
+        return this._eventDate;
     }
 }
 

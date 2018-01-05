@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    mat-card {
+        width: 360px;
+        max-width: 95%;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: stretch;
+
+            p.error {
+                color: mat-color($mat-red, 500);
+            }
+        }
+    }
+}

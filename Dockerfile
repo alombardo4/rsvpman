@@ -2,11 +2,11 @@ FROM 'node:9.3-alpine'
 
 WORKDIR /usr/src/app
 
-COPY built/package*.json ./
+COPY built/dist/package*.json ./
 
 RUN npm install --production
 
-COPY built/. .
+COPY built/dist/. .
 
 EXPOSE 4000
 
