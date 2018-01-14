@@ -2,8 +2,11 @@
   "name": "rsvpman",
   "version": "1.0.0",
   "scripts": {
-    "build": "rm -rf built && mkdir built && cd server && npm run build && cp -R dist/ ../built/",
-    "docker-prepare": "npm run build && docker build . -t alombardo4/rsvpman"
+    "build-server": "rm -rf built && mkdir built && cd server && npm run build && cp -R dist/ ../built/",
+    "build-client": "cd client/rsvpman && npm run build && cp -R dist/ ../../built/dist/client/",
+    "build": "npm run build-server && npm run build-client",
+    "docker-prepare": "npm run build && docker build . -t alombardo4/rsvpman",
+    "postinstall": "cd server && npm i && cd ../client/rsvpman && npm i"
   },
   "author": "Alec Lombardo",
   "license": "MIT"

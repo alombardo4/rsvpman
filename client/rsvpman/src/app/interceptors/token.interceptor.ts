@@ -1,24 +1,39 @@
-import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpEvent, HttpRequest, HttpHandler } from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
+import { HttpInterceptor, HttpEvent, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { LoginService } from '../services/login.service';
+import 'rxjs/add/operator/do';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  private token: null | string = null;
+  private ready = false;
+  
+  constructor(private window: Window, private router: Router, private matDialog: MatDialog) {
 
-  constructor(private loginService: LoginService) {
-    this.loginService.token.subscribe(token => this.token = token);
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const dupReq = req.clone();
-
-    if(this.token) {
-      dupReq.headers.set('Authorization', `Bearer ${this.token}`);
+    let request;
+    const token = this.window.localStorage.getItem('rsvpman.token');
+    if(token) {
+      request = req.clone({headers: req.headers.set('Authorization', `Bearer ${token}`)});
+    } else {
+      request = req;
     }
 
-    return next.handle(dupReq);
+    return next.handle(request).do(
+      _ => { },
+      err => {
+        if(err instanceof HttpErrorResponse) {
+          if(err.status === 401) {
+            this.window.localStorage.removeItem('rsvpman.token');
+            this.matDialog.closeAll();
+            this.router.navigate(['login']);
+          }
+      }
+    })
   }
 }

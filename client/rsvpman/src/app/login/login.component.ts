@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
   error = '';
   loading = false;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -41,7 +42,6 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin() {
-    console.log('login', this.email, this.password);
     this.error = '';
     this.loading = true;
     this.loginService.login(this.email, this.password)
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         data => {
           this.loading = false;
           this.loginService.saveToken(data.token);
-          console.log(data);
+          this.router.navigate(['/admin']);
         },
         err => {
           this.loading = false;

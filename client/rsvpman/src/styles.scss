@@ -29,6 +29,10 @@ body {
     margin: 0;
 }
 
+* {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
 a {
     color: mat-color($mat-blue, 500);
 }

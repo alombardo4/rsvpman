@@ -16,7 +16,7 @@ export class RSVPService {
       this.configService.getBaseHost()
         .subscribe(
           host => {
-            this.httpClient.get(`${host}/api/rsvp/${key}`)
+            this.httpClient.get(`${host}/api/rsvp/${key.toLowerCase()}`)
               .subscribe(
                 data => {
                   observer.next(data);
@@ -37,7 +37,7 @@ export class RSVPService {
       this.configService.getBaseHost()
         .subscribe(
           host => {
-            this.httpClient.get(`${host}/api/rsvp/findKeys?firstName=${firstName}&lastName=${lastName}`)
+            this.httpClient.get(`${host}/api/rsvp/findKeys?firstName=${firstName.toLowerCase()}&lastName=${lastName.toLowerCase()}`)
               .subscribe(
                 data => {
                   observer.next(data);

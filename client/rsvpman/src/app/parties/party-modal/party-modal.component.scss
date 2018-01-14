@@ -1,0 +1,18 @@
+@import '~@angular/material/theming';
+
+p.error {
+    color: mat-color($mat-red, 500);
+}
+
+div.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+mat-toolbar-row.people-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

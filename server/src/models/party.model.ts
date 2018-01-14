@@ -16,7 +16,8 @@ const partySchema = new mongoose.Schema({
     key: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        index: true
     },
     hasRSVPd: {
         type: Boolean,
@@ -25,11 +26,13 @@ const partySchema = new mongoose.Schema({
     people: [{
         firstName: {
             type: String,
-            required: true
+            required: true,
+            index: true
         },
         lastName: {
             type: String,
-            required: true
+            required: true,
+            index: true
         },
         attending: {
             type: Boolean,

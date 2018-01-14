@@ -8,8 +8,6 @@ import { ConfigService } from './config.service';
 @Injectable()
 export class InfoService {
 
-  private baseHost = 'http://localhost:4000';
-
   constructor(private httpClient: HttpClient,
               private configService: ConfigService) { }
 

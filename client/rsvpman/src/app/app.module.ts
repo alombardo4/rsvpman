@@ -16,6 +16,12 @@ import { InfoService } from './services/info.service';
 import { ConfigService } from './services/config.service';
 import { RSVPService } from './services/rsvp.service';
 import { LoginService } from './services/login.service';
+import { AuthGuard } from './guards/auth.guard';
+import { NoAuthGuard } from './guards/no-auth.guard';
+import { AdminHomeModule } from './admin-home/admin-home.module';
+import { UsersModule } from './users/users.module';
+import { PartiesModule } from './parties/parties.module';
+import { GuestsModule } from './guests/guests.module';
 
 @NgModule({
   declarations: [
@@ -30,14 +36,16 @@ import { LoginService } from './services/login.service';
     ServicesModule.forRoot(),
     ThanksModule,
     NameSearchModule,
-    LoginModule
+    LoginModule,
+    HttpClientModule,
+    AdminHomeModule,
+    UsersModule,
+    PartiesModule,
+    GuestsModule
   ],
   providers: [
-
-    InfoService,
-    ConfigService,
-    RSVPService,
-    LoginService,
+    AuthGuard,
+    NoAuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

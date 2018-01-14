@@ -2,8 +2,15 @@ import { default as Party, PartyModel } from '../models/party.model';
 import { Request, Response } from 'express';
 
 export function createParty(req: Request, res: Response) {
-    if(!req.body.key || !req.body.people || req.body.people.length === 0) {
+    if(!req.body.key || !req.body.people) {
         return res.status(400).send();
+    }
+    if(req.body.people) {
+        req.body.people.forEach(person => {
+            if(person._id.indexOf('new') > -1) {
+                person._id = undefined;
+            }
+        })
     }
     Party.create(req.body)
         .then(doc => {
@@ -21,6 +28,13 @@ export function getParties(req: Request, res: Response) {
 export function updateParty(req: Request, res: Response) {
     if(!req.body.key || !req.body.people || req.body.people.length === 0) {
         return res.status(400).send();
+    }
+    if(req.body.people) {
+        req.body.people.forEach(person => {
+            if(person._id.indexOf('new') > -1) {
+                person._id = undefined;
+            }
+        })
     }
 
     Party.findById(req.params.id).exec()

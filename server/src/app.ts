@@ -10,7 +10,7 @@ import * as session from 'express-session';
 import * as connectMongo from 'connect-mongo';
 import { configureRoutes } from './routes';
 import { configureSwagger } from './docs/swagger';
-
+import * as path from 'path';
 
 
 export default {
@@ -19,10 +19,12 @@ export default {
 
         
         const app = express();
+
         app.use((req, res, next) => {
+            console.log('received request to', req.path);
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
             next();
         });
 
@@ -55,7 +57,14 @@ export default {
 
         configureSwagger(app, config);
         
-
+        app.use(express.static('./client'));
+        app.get('*', (req, res) => {
+            const p = req.path.replace('/', '');
+            if(p.indexOf('bundle.js') > -1 || p.indexOf('bundle.css') > -1) {
+                return res.sendFile(path.resolve(__dirname, 'client', p));
+            }
+            res.sendFile(path.resolve(__dirname, 'client', 'index.html'));
+        })
 
         app.listen(config.port, () => {
             console.log('App listening on port', config.port);

@@ -9,10 +9,10 @@ services:
     - rsvpmanmongo:/data/db
   web:
     image: alombardo4/rsvpman
-    environment:
-      - SEED=1
+    # environment:
+      # - SEED=1
     ports:
-      - 4000:4000
+      - 4001:4000
     links:
       - mongo:db
 

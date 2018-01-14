@@ -5,6 +5,8 @@ import { InfoService } from './info.service';
 import { ConfigService } from './config.service';
 import { RSVPService } from './rsvp.service';
 import { LoginService } from './login.service';
+import { UsersService } from './users.service';
+import { PartiesService } from './parties.service';
 
 @NgModule({
   imports: [
@@ -24,6 +26,8 @@ export class ServicesModule {
         ConfigService,
         RSVPService,
         LoginService,
+        UsersService,
+        PartiesService
       ]
     };
   }
