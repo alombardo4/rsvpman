@@ -49,6 +49,12 @@ import { NotesModalComponent } from './notes-modal/notes-modal.component';
             <mat-header-cell *matHeaderCellDef>Number of No</mat-header-cell>
             <mat-cell *matCellDef="let element"> {{getNo(element.people)}} </mat-cell>
           </ng-container>
+
+          <ng-container matColumnDef="hasNotes">
+            <mat-header-cell *matHeaderCellDef>Has Notes?</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.rsvpNote ? 'Yes' : 'No'}} </mat-cell>
+          </ng-container>
+          
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
             <mat-cell *matCellDef="let element">
@@ -69,7 +75,7 @@ export class PartiesComponent implements OnInit {
 
   filterValue = 'all';
 
-  columns = ['key', 'hasRSVPd', 'numPeople', 'numYes', 'numNo', 'actions']
+  columns = ['key', 'hasRSVPd', 'numPeople', 'numYes', 'numNo', 'hasNotes', 'actions']
 
   dataSource = new MatTableDataSource<Party>();
   
