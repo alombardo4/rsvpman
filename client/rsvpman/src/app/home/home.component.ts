@@ -12,11 +12,11 @@ import { Router } from '@angular/router';
   selector: 'app-home',
   template: `
     <div class="home">
-      <h1>{{name}}</h1>
-      <p>{{date | date: 'fullDate'}}
-      <h3>Please RSVP Below</h3>
       <mat-card>
         <mat-card-content>
+          <h1>{{name}}</h1>
+          <p>{{date | date: 'fullDate'}}
+          <h3>Please RSVP Below</h3>
           <form novalidate>
             <mat-form-field>
               <input type="text" matInput placeholder="Enter your keyword" autofocus [value]="currentKey" (input)="handleKeyChange($event)"/>

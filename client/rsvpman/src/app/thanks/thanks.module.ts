@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThanksComponent } from './thanks.component';
 import { RouterModule, Route } from '@angular/router';
+import { MatCardModule } from '@angular/material';
 
 const routes: Route[] = [
   {
@@ -14,7 +15,8 @@ const routes: Route[] = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatCardModule
   ],
   declarations: [ThanksComponent]
 })

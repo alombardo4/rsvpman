@@ -7,6 +7,7 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
 import { MatTableModule, MatButtonModule, MatIconModule, MatCardModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatCheckboxModule, MatSelectModule } from '@angular/material';
 import { PartyModalComponent } from './party-modal/party-modal.component';
 import { PersonModalComponent } from './person-modal/person-modal.component';
+import { NotesModalComponent } from './notes-modal/notes-modal.component';
 
 const routes: Route[] = [
   {
@@ -33,7 +34,7 @@ const routes: Route[] = [
     MatCheckboxModule,
     MatSelectModule
   ],
-  declarations: [PartiesComponent, PartyModalComponent, PersonModalComponent],
-  entryComponents: [PartyModalComponent, PersonModalComponent]
+  declarations: [PartiesComponent, PartyModalComponent, PersonModalComponent, NotesModalComponent],
+  entryComponents: [PartyModalComponent, PersonModalComponent, NotesModalComponent]
 })
 export class PartiesModule { }

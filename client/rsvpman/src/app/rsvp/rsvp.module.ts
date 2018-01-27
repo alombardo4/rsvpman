@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RsvpComponent } from './rsvp.component';
 import { Route, RouterModule } from '@angular/router';
-import { MatCardModule, MatButtonModule, MatRadioModule, MatSnackBarModule } from '@angular/material';
+import { MatCardModule, MatButtonModule, MatRadioModule, MatSnackBarModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 const routes: Route[] = [
@@ -21,7 +21,9 @@ const routes: Route[] = [
     MatButtonModule,
     MatRadioModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   declarations: [RsvpComponent]
 })

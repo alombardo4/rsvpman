@@ -3,6 +3,7 @@ export interface Party {
     key: string;
     hasRSVPd: boolean;
     people: Person[];
+    rsvpNote?: string;
 }
 
 export interface Person {

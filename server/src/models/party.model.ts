@@ -3,7 +3,8 @@ import * as mongoose from 'mongoose';
 export type PartyModel = {
     key: string,
     people: PersonModel[],
-    hasRSVPd: boolean
+    hasRSVPd: boolean,
+    rsvpNote?: string
 }
 
 export type PersonModel = {
@@ -22,6 +23,10 @@ const partySchema = new mongoose.Schema({
     hasRSVPd: {
         type: Boolean,
         default: false
+    },
+    rsvpNote: {
+        type: String,
+        default: ''
     },
     people: [{
         firstName: {

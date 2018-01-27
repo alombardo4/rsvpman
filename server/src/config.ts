@@ -13,6 +13,8 @@ export class Config {
 
     private _eventDate = new Date();
 
+    private _thankYouMessage = 'We can\'t wait to see you';
+
     constructor() {
         this._eventDate.setTime(1535850000000);
         if(process.env.PORT) {
@@ -29,6 +31,10 @@ export class Config {
         }
         if(process.env.EVENT_NAME) {
             this._eventName = process.env.EVENT_NAME;
+        }
+
+        if(process.env.THANK_YOU_MESSAGE) {
+            this._thankYouMessage = process.env.THANK_YOU_MESSAGE;
         }
 
         if(process.env.EVENT_DATE) {
@@ -62,6 +68,10 @@ export class Config {
 
     get eventDate(): Date {
         return this._eventDate;
+    }
+
+    get thankYouMessage(): string {
+        return this._thankYouMessage;
     }
 }
 

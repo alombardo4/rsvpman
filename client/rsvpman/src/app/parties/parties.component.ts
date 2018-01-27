@@ -3,6 +3,7 @@ import { PartiesService } from '../services/parties.service';
 import { Party, Person } from './party.model';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { PartyModalComponent } from './party-modal/party-modal.component';
+import { NotesModalComponent } from './notes-modal/notes-modal.component';
 
 @Component({
   selector: 'app-parties',
@@ -51,6 +52,7 @@ import { PartyModalComponent } from './party-modal/party-modal.component';
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
             <mat-cell *matCellDef="let element">
+              <button mat-icon-button (click)="handleShowNotes(element._id)"><mat-icon>notes</mat-icon></button>
               <button mat-icon-button (click)="handleEdit(element._id)"><mat-icon>edit</mat-icon></button>
               <button mat-icon-button (click)="handleDelete(element._id)"><mat-icon>delete</mat-icon></button>
             </mat-cell>
@@ -129,5 +131,10 @@ export class PartiesComponent implements OnInit {
     this.matDialog.open(PartyModalComponent, { data: { type: 'EDIT', id: id }, width: '90vw'})
       .afterClosed()
       .subscribe(_ => this.reloadData());
+  }
+
+  handleShowNotes(id: string) {
+    const note = this.parties.find((party: Party) => party._id === id).rsvpNote;
+    this.matDialog.open(NotesModalComponent, { data: { note: note}});
   }
 }

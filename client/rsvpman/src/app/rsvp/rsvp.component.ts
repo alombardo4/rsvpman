@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
   selector: 'app-rsvp',
   template: `
     <div class="rsvp">
-      <h1>Please RSVP for your party</h1>
       <mat-card>
         <mat-card-content *ngIf="!rsvpData?.hasRSVPd">
+          <h1>Please RSVP for your party</h1>
           <div class="party-member" *ngFor="let person of rsvpData?.people">
             <label>{{person.firstName}} {{person.lastName}}</label>
             <mat-radio-group class="options" [(ngModel)]="person.attending">
@@ -19,12 +19,15 @@ import { Router } from '@angular/router';
               <mat-radio-button [value]="false">Regretfully Declines</mat-radio-button>
             </mat-radio-group>
           </div>
+          <mat-form-field>
+            <textarea matInput [(ngModel)]="rsvpData.rsvpNote" placeholder="Notes (optional)" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="10"></textarea>
+          </mat-form-field>
+          <button *ngIf="!rsvpData?.hasRSVPd" mat-raised-button color="primary" (click)="handleRSVPClicked()" [disabled]="!rsvpData || disableSubmit">RSVP</button>
         </mat-card-content>
         <mat-card-content *ngIf="rsvpData?.hasRSVPd">
           <h3>Your response has already been recorded. Thanks!</h3>
         </mat-card-content>
       </mat-card>
-      <button *ngIf="!rsvpData?.hasRSVPd" mat-raised-button color="primary" (click)="handleRSVPClicked()" [disabled]="!rsvpData || disableSubmit">RSVP</button>
     </div>
   `,
   styleUrls: ['./rsvp.component.scss']
@@ -35,7 +38,7 @@ export class RsvpComponent implements OnInit, OnDestroy {
 
   currentKey: string;
 
-  rsvpData: any;
+  rsvpData;
 
   disableSubmit = false;
 
@@ -54,6 +57,7 @@ export class RsvpComponent implements OnInit, OnDestroy {
             this.rsvpData.people.forEach(person => {
               person.attending = true;
             });
+            this.rsvpData.rsvpNote = '';
           },
           err => {
             this.handleError('It looks like we\'re having trouble loading your RSVP information. Please try again later.');
@@ -68,7 +72,7 @@ export class RsvpComponent implements OnInit, OnDestroy {
 
   handleRSVPClicked() {
     this.disableSubmit = true;
-    this.rsvpService.rsvpToParty(this.currentKey, this.rsvpData.people)
+    this.rsvpService.rsvpToParty(this.currentKey, this.rsvpData.people, this.rsvpData.rsvpNote)
       .subscribe(
         data => {
           this.router.navigate(['thanks']);

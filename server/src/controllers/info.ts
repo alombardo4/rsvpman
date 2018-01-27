@@ -4,6 +4,7 @@ export function eventInfo(req, res) {
     const config = new Config();
     return res.json({
         name: config.eventName,
-        date: config.eventDate
+        date: config.eventDate,
+        thankYouMessage: config.thankYouMessage
     })
 }

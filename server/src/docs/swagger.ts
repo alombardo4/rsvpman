@@ -71,6 +71,9 @@ const document = {
                                 },
                                 'date': {
                                     type: 'date'
+                                },
+                                'thankYouMessage': {
+                                    type: 'string'
                                 }
                             }
                         }
@@ -399,6 +402,9 @@ const document = {
                 hasRSVPd: {
                     type: 'boolean'
                 },
+                rsvpNote: {
+                    type: 'string'
+                },
                 people: {
                     type: 'array',
                     items: {
@@ -431,6 +437,9 @@ const document = {
                     items: {
                         $ref: '#/definitions/Person'
                     }
+                },
+                rsvpNote: {
+                    type: 'string'
                 }
             }
         }

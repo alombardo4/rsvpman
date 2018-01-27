@@ -3,7 +3,8 @@ import { Document } from 'mongoose';
 
 
 type RSVPBody = {
-    attendees: PersonModel[]
+    attendees: PersonModel[],
+    rsvpNote?: string
 }
 
 export function getPartyForRSVP(req, res) {
@@ -49,6 +50,8 @@ export function createRSVP(req, res) {
 
                 return newPerson;
             });
+
+            party.rsvpNote = (req.body as RSVPBody).rsvpNote;
 
             Party.findByIdAndUpdate(partyDoc._id, party).exec()
                 .then((doc) => {

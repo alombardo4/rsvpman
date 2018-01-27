@@ -53,7 +53,7 @@ export class RSVPService {
     });
   }
 
-  rsvpToParty(key: string, attendees: any[]): Observable<any> {
+  rsvpToParty(key: string, attendees: any[], rsvpNote?: string): Observable<any> {
     const submitAttendees = [...attendees].map(person => {
       return {
         firstName: person.firstName,
@@ -65,7 +65,7 @@ export class RSVPService {
       this.configService.getBaseHost()
         .subscribe(
           host => {
-            this.httpClient.post(`${host}/api/rsvp/${key}`, {attendees: submitAttendees})
+            this.httpClient.post(`${host}/api/rsvp/${key}`, {attendees: submitAttendees, rsvpNote: rsvpNote})
               .subscribe(
                 data => {
                   observer.next(data);

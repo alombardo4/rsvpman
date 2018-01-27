@@ -6,7 +6,7 @@ import 'rxjs/add/operator/filter';
 @Component({
   selector: 'app-root',
   template: `
-    <div [class.body]="!isAdmin">
+    <div class="root" [class.body]="!isAdmin">
       <router-outlet></router-outlet>
     </div>
   `,
