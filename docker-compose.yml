@@ -1,16 +1,22 @@
-version: '2'
+version: '3'
 
 services:
   mongo:
     image: mongo
     ports:
-     - 27017:27017
+     - 27020:27017
     volumes:
     - rsvpmanmongo:/data/db
   web:
     image: alombardo4/rsvpman
-    # environment:
-      # - SEED=1
+    environment:
+      - SEED=1
+      - MONGO_URL=mongodb://192.168.254.176:27020/rsvpman
+    deploy:
+      mode: replicated
+      replicas: 2
+    depends_on:
+      - mongo
     ports:
       - 4000:4000
     links:

@@ -6,6 +6,7 @@
     "build-client": "cd client/rsvpman && npm run build && cp -R dist/ ../../built/dist/client/",
     "build": "npm run build-server && npm run build-client",
     "docker-prepare": "npm run build && docker build . -t alombardo4/rsvpman",
+    "docker-push": "npm run docker-prepare && docker push alombardo4/rsvpman",
     "postinstall": "cd server && npm i && cd ../client/rsvpman && npm i"
   },
   "author": "Alec Lombardo",
