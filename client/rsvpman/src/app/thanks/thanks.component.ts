@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
         <h1>Thank you for your RSVP</h1>
         <h2>{{this.message}}</h2>
         <h3 *ngIf="date">{{date | date: 'fullDate'}}</h3>
+        <a [routerLink]="['/']">Go home</a>
       </mat-card-content>
     </mat-card>
 

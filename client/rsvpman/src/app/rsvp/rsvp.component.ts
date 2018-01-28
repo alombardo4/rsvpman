@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   template: `
     <div class="rsvp">
       <mat-card>
-        <mat-card-content *ngIf="!rsvpData?.hasRSVPd">
+        <mat-card-content *ngIf="!rsvpData?.hasRSVPd && !loading">
           <h1>Please RSVP for your party</h1>
           <div class="party-member" *ngFor="let person of rsvpData?.people">
             <label>{{person.firstName}} {{person.lastName}}</label>
@@ -24,8 +24,12 @@ import { Router } from '@angular/router';
           </mat-form-field>
           <button *ngIf="!rsvpData?.hasRSVPd" mat-raised-button color="primary" (click)="handleRSVPClicked()" [disabled]="!rsvpData || disableSubmit">RSVP</button>
         </mat-card-content>
-        <mat-card-content *ngIf="rsvpData?.hasRSVPd">
+        <mat-card-content *ngIf="rsvpData?.hasRSVPd && !loading">
           <h3>Your response has already been recorded. Thanks!</h3>
+          <a [routerLink]="['/']">Go home</a>
+        </mat-card-content>
+        <mat-card-content *ngIf="loading">
+          <mat-spinner></mat-spinner>
         </mat-card-content>
       </mat-card>
     </div>
@@ -35,6 +39,8 @@ import { Router } from '@angular/router';
 export class RsvpComponent implements OnInit, OnDestroy {
 
   router$: Subscription;
+
+  loading = true;
 
   currentKey: string;
 
@@ -58,6 +64,7 @@ export class RsvpComponent implements OnInit, OnDestroy {
               person.attending = true;
             });
             this.rsvpData.rsvpNote = '';
+            this.loading = false;
           },
           err => {
             this.handleError('It looks like we\'re having trouble loading your RSVP information. Please try again later.');

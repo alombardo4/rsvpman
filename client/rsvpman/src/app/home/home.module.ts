@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule, Route} from '@angular/router';
-import { MatSnackBarModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatCardModule } from '@angular/material';
+import { MatSnackBarModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatCardModule, MatProgressSpinnerModule } from '@angular/material';
 
 const routes: Route[] = [
   {
@@ -20,7 +20,8 @@ const routes: Route[] = [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   declarations: [HomeComponent]
 })

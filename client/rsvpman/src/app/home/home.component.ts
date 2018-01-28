@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   template: `
     <div class="home">
       <mat-card>
-        <mat-card-content>
+        <mat-card-content *ngIf="!loading">
           <h1>{{name}}</h1>
           <p>{{date | date: 'fullDate'}}
           <h3>Please RSVP Below</h3>
@@ -25,6 +25,9 @@ import { Router } from '@angular/router';
             <p *ngIf="error" class="error">{{error}}</p>
           </form>
           <a routerLink="search">Having trouble finding your keyword?</a>
+        </mat-card-content>
+        <mat-card-content *ngIf="loading">
+          <mat-spinner></mat-spinner>
         </mat-card-content>
       </mat-card>
     </div>
@@ -39,6 +42,7 @@ export class HomeComponent implements OnInit {
   disableSubmit = false;
   error = '';
   currentKey = '';
+  loading = true;
 
 
   constructor(private infoService: InfoService,
@@ -54,6 +58,7 @@ export class HomeComponent implements OnInit {
           this.disableSubmit = false;
           this.name = data.name;
           this.date = data.date;
+          this.loading = false;
         },
         err => this.handleError()
       );

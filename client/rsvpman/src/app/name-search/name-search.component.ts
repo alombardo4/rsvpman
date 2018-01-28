@@ -6,9 +6,9 @@ import {Router} from '@angular/router';
   selector: 'app-name-search',
   template: `
     <div class="search">
-      <h3>Having trouble finding your keyword?</h3>
       <mat-card>
         <mat-card-content>
+          <h3>Having trouble finding your keyword?</h3>        
           <p>Enter your first and last name below to look it up</p>
           <form novalidate >
             <mat-form-field>
@@ -20,6 +20,7 @@ import {Router} from '@angular/router';
             <button type="submit" mat-raised-button color="primary" (click)="handleSubmit($event)" [disabled]="loading || !lastName || !firstName">Search</button>
             <p *ngIf="error" class="error">{{error}}</p>
           </form>
+          <a [routerLink]="['/']">Go home</a>
         </mat-card-content>
       </mat-card>
     </div>
