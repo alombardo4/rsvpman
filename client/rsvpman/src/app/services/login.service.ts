@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './config.service';
 import { Observable } from 'rxjs/Observable';
@@ -14,7 +14,7 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient,
     private configService: ConfigService,
-    private window: Window) { }
+    @Inject('window') private window: Window) { }
 
   login(email: string, password: string): Observable<any> {
     return Observable.create((observer: Observer<any>) => {

@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, Inject } from '@angular/core';
 import { HttpInterceptor, HttpEvent, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { LoginService } from '../services/login.service';
@@ -11,7 +11,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   private ready = false;
   
-  constructor(private window: Window, private router: Router, private matDialog: MatDialog) {
+  constructor(@Inject('window') private window: Window, private router: Router, private matDialog: MatDialog) {
 
   }
 

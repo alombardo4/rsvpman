@@ -14,7 +14,6 @@ import { PartiesService } from './parties.service';
   ],
   declarations: [],
   providers: [
-    { provide: Window, useValue: window}
   ]
 })
 export class ServicesModule {
@@ -27,8 +26,14 @@ export class ServicesModule {
         RSVPService,
         LoginService,
         UsersService,
-        PartiesService
+        PartiesService,
+        { provide: 'window', useFactory: getWindow }
       ]
     };
   }
+}
+
+
+export function getWindow() {
+  return window;
 }

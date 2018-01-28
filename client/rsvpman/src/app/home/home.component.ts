@@ -17,11 +17,11 @@ import { Router } from '@angular/router';
           <h1>{{name}}</h1>
           <p>{{date | date: 'fullDate'}}
           <h3>Please RSVP Below</h3>
-          <form novalidate>
+          <form novalidate (submit)="handleRSVPClick($event)">
             <mat-form-field>
               <input type="text" matInput placeholder="Enter your keyword" autofocus [value]="currentKey" (input)="handleKeyChange($event)"/>
             </mat-form-field>
-            <button type="submit" mat-raised-button color="primary" [disabled]="currentKey === '' || disableSubmit" (click)="handleRSVPClick()">RSVP</button>
+            <button type="submit" mat-raised-button color="primary" [disabled]="currentKey === '' || disableSubmit" (click)="handleRSVPClick($event)">RSVP</button>
             <p *ngIf="error" class="error">{{error}}</p>
           </form>
           <a routerLink="search">Having trouble finding your keyword?</a>
@@ -73,7 +73,10 @@ export class HomeComponent implements OnInit {
     this.currentKey = event.target.value;
   }
 
-  handleRSVPClick() {
+  handleRSVPClick(ev) {
+    if(ev) {
+      ev.preventDefault();
+    }
     this.disableSubmit = true;
     this.rsvpService.getRSVPDetails(this.currentKey)
       .subscribe(
