@@ -10,5 +10,9 @@ export interface Person {
     firstName: string;
     lastName: string;
     attending: boolean;
-    _id?: string
+    _id?: string;
+    rehearsal?: {
+        invited: boolean,
+        attending: boolean
+    };
 }

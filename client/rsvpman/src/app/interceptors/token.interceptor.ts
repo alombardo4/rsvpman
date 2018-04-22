@@ -5,6 +5,7 @@ import { LoginService } from '../services/login.service';
 import 'rxjs/add/operator/do';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
+import 'rxjs/add/operator/share';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -34,6 +35,6 @@ export class TokenInterceptor implements HttpInterceptor {
             this.router.navigate(['login']);
           }
       }
-    })
+    }).share();
   }
 }

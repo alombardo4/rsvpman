@@ -10,7 +10,11 @@ export type PartyModel = {
 export type PersonModel = {
     firstName: string,
     lastName: string,
-    attending: boolean
+    attending: boolean,
+    rehearsal?: {
+        invited: boolean,
+        attending: boolean
+    }
 }
 
 const partySchema = new mongoose.Schema({
@@ -42,6 +46,16 @@ const partySchema = new mongoose.Schema({
         attending: {
             type: Boolean,
             default: false
+        },
+        rehearsal: {
+            invited: {
+                type: Boolean,
+                default: false
+            },
+            attending: {
+                type: Boolean,
+                default: false
+            }
         }
     }]
 }, { timestamps: true});

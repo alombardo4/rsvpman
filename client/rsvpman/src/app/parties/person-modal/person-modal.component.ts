@@ -16,6 +16,8 @@ import { Person } from '../party.model';
           <input matInput required type="text" [value]="person?.lastName" placeholder="Last Name" (input)="handleChange('lastName', $event)" />
         </mat-form-field>
         <mat-checkbox [checked]="person?.attending" (change)="handleAttendingChange($event)">Attending</mat-checkbox>
+        <mat-checkbox [checked]="person?.rehearsal?.invited" (change)="handleRehearsalInvitedChanged($event)">Invited to Rehearsal</mat-checkbox>
+        <mat-checkbox [disabled]="!person?.rehearsal?.invited" [checked]="person?.rehearsal?.attending" (change)="handleRehearsalAttendingChanged($event)">Attending Rehearsal</mat-checkbox>
       </div>
       <div mat-dialog-actions>
         <button mat-button (click)="handleCancel()">Cancel</button>
@@ -76,6 +78,26 @@ export class PersonModalComponent implements OnInit {
 
   handleAttendingChange(event: MatCheckboxChange) {
     this.person.attending = event.checked;
+  }
+
+  handleRehearsalInvitedChanged(event: MatCheckboxChange) {
+    if (!this.person.rehearsal) {
+      this.person.rehearsal = {
+        invited: false,
+        attending: false
+      };
+    }
+    this.person.rehearsal.invited = event.checked;
+  }
+
+  handleRehearsalAttendingChanged(event: MatCheckboxChange) {
+    if (!this.person.rehearsal) {
+      this.person.rehearsal = {
+        invited: false,
+        attending: false
+      };
+    }
+    this.person.rehearsal.attending = event.checked;
   }
 
 

@@ -46,6 +46,9 @@ export function createRSVP(req, res) {
                 });
                 if(attendee) {
                     newPerson.attending = attendee.attending;
+                    if(newPerson.rehearsal && newPerson.rehearsal.invited) {
+                        newPerson.rehearsal = attendee.rehearsal;
+                    }
                 }
 
                 return newPerson;

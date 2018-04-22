@@ -20,6 +20,8 @@ import { PartiesService } from '../services/parties.service';
               <mat-option value="yesRSVP">RSVP Recevied</mat-option>
               <mat-option value="noAttending">Not Attending</mat-option>
               <mat-option value="yesAttending">Attending</mat-option>
+              <mat-option value="invitedToRehearsal">Invited to Rehearsal</mat-option>
+              <mat-option value="attendingRehearsal">Attending Rehearsal</mat-option>
             </mat-select>
           </mat-toolbar-row>
         </mat-toolbar>
@@ -43,7 +45,14 @@ import { PartiesService } from '../services/parties.service';
             <mat-header-cell *matHeaderCellDef>Attending</mat-header-cell>
             <mat-cell *matCellDef="let element">{{element.attending ? 'Yes' : 'No'}}</mat-cell>
           </ng-container>
-
+          <ng-container matColumnDef="rehearsalInvite">
+            <mat-header-cell *matHeaderCellDef>Invited to Rehearsal</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.rehearsal && element.rehearsal.invited ? 'Yes' : 'No'}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="rehearsalAttending">
+            <mat-header-cell *matHeaderCellDef>Attending Rehearsal</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.rehearsal && element.rehearsal.attending ? 'Yes' : 'No'}}</mat-cell>
+          </ng-container>
 
         </mat-table>
       </mat-card-content>
@@ -53,7 +62,7 @@ import { PartiesService } from '../services/parties.service';
 })
 export class GuestsComponent implements OnInit {
 
-  columns = ['firstName', 'lastName', 'hasRSVPd', 'attending'];
+  columns = ['firstName', 'lastName', 'hasRSVPd', 'attending', 'rehearsalInvite', 'rehearsalAttending'];
 
   peopleSource = new MatTableDataSource<Guest>();
   guests: Guest[] = [];
@@ -92,6 +101,10 @@ export class GuestsComponent implements OnInit {
       this.peopleSource = new MatTableDataSource<Guest>(this.guests.filter((guest: Guest) => guest.attending === false));
     } else if(this.filterValue === 'yesAttending') {
       this.peopleSource = new MatTableDataSource<Guest>(this.guests.filter((guest: Guest) => guest.attending === true));
+    } else if(this.filterValue === 'invitedToRehearsal') {
+      this.peopleSource = new MatTableDataSource<Guest>(this.guests.filter((guest: Guest) => guest.rehearsal && guest.rehearsal.invited));
+    } else if(this.filterValue === 'attendingRehearsal') {
+      this.peopleSource = new MatTableDataSource<Guest>(this.guests.filter((guest: Guest) => guest.rehearsal && guest.rehearsal.attending));
     } else {
       this.peopleSource = new MatTableDataSource<Guest>(this.guests);
     }

@@ -58,7 +58,8 @@ export class RSVPService {
       return {
         firstName: person.firstName,
         lastName: person.lastName,
-        attending: person.attending
+        attending: person.attending,
+        rehearsal: person.rehearsal
       };
     });
     return Observable.create((observer: Observer<any>) => {

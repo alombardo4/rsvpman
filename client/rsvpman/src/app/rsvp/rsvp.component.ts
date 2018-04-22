@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { RSVPService } from '../services/rsvp.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { Person } from '../parties/party.model';
 
 @Component({
   selector: 'app-rsvp',
@@ -12,12 +13,25 @@ import { Router } from '@angular/router';
       <mat-card>
         <mat-card-content *ngIf="!rsvpData?.hasRSVPd && !loading">
           <h1>Please RSVP for your party</h1>
-          <div class="party-member" *ngFor="let person of rsvpData?.people">
-            <label>{{person.firstName}} {{person.lastName}}</label>
-            <mat-radio-group class="options" [(ngModel)]="person.attending">
-              <mat-radio-button [value]="true">Accepts with Pleasure</mat-radio-button>
-              <mat-radio-button [value]="false">Regretfully Declines</mat-radio-button>
-            </mat-radio-group>
+          <div>
+            <h3>Wedding & Reception</h3>
+            <div class="party-member" *ngFor="let person of rsvpData?.people">
+              <label>{{person.firstName}} {{person.lastName}}</label>
+              <mat-radio-group class="options" [(ngModel)]="person.attending">
+                <mat-radio-button [value]="true">Accepts with Pleasure</mat-radio-button>
+                <mat-radio-button [value]="false">Regretfully Declines</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div *ngIf="getInvitedToRehearsal().length > 0">
+            <h3>Rehearsal</h3>
+            <div class="party-member" *ngFor="let person of getInvitedToRehearsal()">
+              <label>{{person.firstName}} {{person.lastName}}</label>
+              <mat-radio-group class="options" [(ngModel)]="person.rehearsal.attending">
+                <mat-radio-button [value]="true">Accepts with Pleasure</mat-radio-button>
+                <mat-radio-button [value]="false">Regretfully Declines</mat-radio-button>
+              </mat-radio-group>
+            </div>
           </div>
           <mat-form-field>
             <textarea matInput [(ngModel)]="rsvpData.rsvpNote" placeholder="Notes (optional)" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="10"></textarea>
@@ -62,6 +76,9 @@ export class RsvpComponent implements OnInit, OnDestroy {
             this.rsvpData = data;
             this.rsvpData.people.forEach(person => {
               person.attending = true;
+              if(person.rehearsal && person.rehearsal.invited) {
+                person.rehearsal.attending = true;
+              }
             });
             this.rsvpData.rsvpNote = '';
             this.loading = false;
@@ -75,6 +92,12 @@ export class RsvpComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.router$.unsubscribe();
+  }
+
+  getInvitedToRehearsal() {
+    return this.rsvpData.people.filter((person: Person) => {
+      return person.rehearsal && person.rehearsal.invited;
+    });
   }
 
   handleRSVPClicked() {
