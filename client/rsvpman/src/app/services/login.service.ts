@@ -39,7 +39,7 @@ export class LoginService {
 
   saveToken(token: string) {
     this._token = token;
-    this.window.localStorage.setItem(TOKEN_NAME, token);
+    this.window.sessionStorage.setItem(TOKEN_NAME, token);
     this.tokenObservers.forEach(observer => {
       if(!observer.closed) {
         observer.next(this._token);
@@ -49,7 +49,7 @@ export class LoginService {
 
   clearToken() {
     this._token = null;
-    this.window.localStorage.removeItem(TOKEN_NAME);
+    this.window.sessionStorage.removeItem(TOKEN_NAME);
     this.tokenObservers.forEach(observer => {
       if(!observer.closed) {
         observer.next(null);
@@ -61,7 +61,7 @@ export class LoginService {
     if(this._token) {
       return this._token;
     }
-    const token = this.window.localStorage.getItem(TOKEN_NAME);
+    const token = this.window.sessionStorage.getItem(TOKEN_NAME);
     if(token) {
       this._token = token;
       return token;

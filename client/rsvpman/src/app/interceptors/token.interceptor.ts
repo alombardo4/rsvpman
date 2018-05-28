@@ -18,7 +18,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let request;
-    const token = this.window.localStorage.getItem('rsvpman.token');
+    const token = this.window.sessionStorage.getItem('rsvpman.token');
     if(token) {
       request = req.clone({headers: req.headers.set('Authorization', `Bearer ${token}`)});
     } else {
@@ -29,8 +29,8 @@ export class TokenInterceptor implements HttpInterceptor {
       _ => { },
       err => {
         if(err instanceof HttpErrorResponse) {
-          if(err.status === 401) {
-            this.window.localStorage.removeItem('rsvpman.token');
+          if(err.status === 401 || err.status === 403) {
+            this.window.sessionStorage.removeItem('rsvpman.token');
             this.matDialog.closeAll();
             this.router.navigate(['login']);
           }
