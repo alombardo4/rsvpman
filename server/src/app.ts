@@ -40,7 +40,7 @@ export default {
         
         app.use(session({
             secret: config.secrets.session,
-            saveUninitialized: true,
+            saveUninitialized: false,
             resave: true,
             store: new MongoStore({
                 url: config.mongo.url,
