@@ -11,6 +11,14 @@ export class LoginService {
   
   private _token: string;
   private tokenObservers: Observer<string>[] = [];
+  
+  token = Observable.create(observer => {
+    this.tokenObservers.push(observer);
+    const t = this.getToken();
+    if(t) {
+      observer.next(t);
+    }
+  })
 
   constructor(private httpClient: HttpClient,
     private configService: ConfigService,
@@ -69,13 +77,5 @@ export class LoginService {
       return null;
     }
   }
-
-  token = Observable.create(observer => {
-    this.tokenObservers.push(observer);
-    const t = this.getToken();
-    if(t) {
-      observer.next(t);
-    }
-  })
 
 }
