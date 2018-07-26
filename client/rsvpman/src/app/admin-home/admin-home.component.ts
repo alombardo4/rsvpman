@@ -10,6 +10,7 @@ import { Party, Person } from '../parties/party.model';
     <mat-card class="container">
       <mat-card-content>
         <h1>Welcome to RSVPMan Admin Panel</h1>
+        <button mat-raised-button (click)="handleDownload()">Download Export</button>
         <div class="buttons">
           <mat-card [routerLink]="['/admin', 'users']">
             <mat-card-content>
@@ -78,6 +79,11 @@ export class AdminHomeComponent implements OnInit {
       counter += party.people.filter((person: Person) => person.attending).length;
     })
     return counter;
+  }
+
+  handleDownload() {
+    this.partiesService.getExport()
+      .subscribe();
   }
 
 }

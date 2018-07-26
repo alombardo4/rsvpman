@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AdminHomeComponent } from './admin-home.component';
 import { RouterModule, Route } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
-import { MatCardModule, MatToolbarModule } from '@angular/material';
+import { MatCardModule, MatToolbarModule, MatButtonModule } from '@angular/material';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 const routes: Route[] = [
@@ -21,7 +21,8 @@ const routes: Route[] = [
     RouterModule.forChild(routes),
     MatCardModule,
     SharedComponentsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatButtonModule
   ],
   declarations: [AdminHomeComponent]
 })

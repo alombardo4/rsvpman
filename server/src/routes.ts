@@ -21,6 +21,8 @@ export function configureRoutes(app, passport) {
     app.put('/api/parties/:id', isAuthenticated(), partyController.updateParty);
     app.delete('/api/parties/:id', isAuthenticated(), partyController.deleteParty);
     
+    app.get('/api/parties/export', isAuthenticated(), partyController.getExport);
+
     // RSVP
     app.post('/api/rsvp/:key', rsvpController.createRSVP);
     app.get('/api/rsvp/findKeys', rsvpController.findKeys);
