@@ -1,6 +1,6 @@
 {
   "name": "rsvpman",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "scripts": {
     "build-server": "rm -rf built && mkdir built && cd server && npm run build && cp -R dist/ ../built/",
     "build-client": "cd client/rsvpman && npm run build && cp -R dist/ ../../built/dist/client/",
